@@ -6,6 +6,12 @@ if [ ! -z "${REALPATH}" ]; then
   DIRNAME=`realpath ${DIRNAME}`
 fi
 
-hhvm \
+if [ "$HPHP_HOME" != "" ]; then
+    HHVM="${HPHP_HOME}/hphp/hhvm/hhvm"
+else
+    HHVM=hhvm
+fi
+
+$HHVM \
   -vDynamicExtensions.0=${DIRNAME}/hnifib.so \
   ${DIRNAME}/app.php
